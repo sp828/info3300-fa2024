@@ -118,7 +118,7 @@
     return colors[Math.floor(Math.random() * colors.length)]
   }
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
     let x = randomPixel();
     let y = randomPixel();
 
@@ -161,6 +161,13 @@
     .delay(1600)
     .duration(500)
     .attr("r", 20);
+
+  d3.selectAll("circle")
+    .transition()
+    .delay(4000)
+    .duration(400)
+    .attr("cx", randomPixel)
+    .attr("cy",randomPixel);
   
   </script>
 
