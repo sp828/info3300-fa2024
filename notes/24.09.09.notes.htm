@@ -68,42 +68,100 @@
   <script id="notes">
   
   // New import! (see <head> of document)
-  
+  console.log(d3.scaleLinear);
   
   
   
   // 1. How can we select elements? What is the difference between select() and selectAll()?
+  // let div1 = document.getElementById("d3");
+  // console.log(div1);
+  // div1.innerHTML = "testing";
+  // div1.style.color = "red";
 
+  let d3div1 = d3.select("#d1");
+  console.log(d3div1);
+  d3div1.text("Isn't d3 amazing.");
+  d3div1.style("color", "red");
+  console.log(d3div1.text());
+  console.log(d3div1.style("color"));
 
+  d3div1.text("Isn't chaining amazing")
+        .style("background-color", "black")
+        .style("color", "aquamarine");
 
+  let divs = d3.selectAll("div.hellowdiv");
+  divs.style("font-family", "Wingdings");
 
-  
+  d3.selectAll("div.hellodiv")
+    .style("background-ccolor", black)
+    .style("color", "aquamarine");
   
   // 2a. How can we create new elements, and set their attributes and styles?
-  
-  
+  let svg = d3.select("svg");
+  console.log(svg);
+
+  svg.append("circle")
+     .attr("r", 10)
+     .attr("cx", 100)
+     .attr("cy", 100)
+     .style("fill", "red")
+     .on("click", function() {console.log("Cirles are the best shape!");})
   
   
   // 2b. How do we create lots of elements (but not using data just yet)?
-  // let colors = ["yellow", "blue", "pink", "green"];
-  // 
-  // function randomPixel() {
-  //   return Math.random() * svg.attr("height");    }
-  // 
-  // function randomColor() {
-  //   return colors[Math.floor(Math.random() * colors.length)]
-  // }
+  let colors = ["yellow", "blue", "pink", "green"];
+  
+  function randomPixel() {
+    return Math.random() * svg.attr("height");    }
+  
+  function randomColor() {
+    return colors[Math.floor(Math.random() * colors.length)]
+  }
 
+  for (let i = 0; i < 10; i++) {
+    let x = randomPixel();
+    let y = randomPixel();
+
+    svg.append("circle")
+        .attr("r", 4)
+        .attr("cx", x)
+        .attr("cy", y)
+        .style("fill", "orange");
+  }
+
+  // JS style loop
+  color.forEach((d,i) => {
+    console.log(d,i);
+
+    let rad = Math.floor(10 + Math.random() * 15);
+    svg.append("circle")
+        .attr("r", rad)
+        .attr("cx", randomPixel())
+        .attr("cy", randomPixel())
+        .style("fill", d);
+  });
+
+  d3.selectAll("circle").style("fill", "red");
+  d3.selectAll("circle").style("fill", () => {return "blue"});
   
   
   
   // 3. How do we update the attributes of existing elements?
-  
-  
-  
-  
-  
+  d3.selectAll("circle")
+    // not animated
+    .transition()
+    .delay(100) // wait 1 seconds before starting
+    .duration(2000) // take 0.5 seconds to animate
+    // animation happens to whatever changes I make
+    // .style("fill", randomColor())
+    .style("fill", () => {return randomColor});
 
+  d3.selectAll("circle")
+    .transition()
+    .delay(1600)
+    .duration(500)
+    .attr("r", 20);
+  
   </script>
 
 
